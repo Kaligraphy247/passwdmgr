@@ -1,5 +1,9 @@
 //*
 import QuickLinks from "../components/quickLinks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+
+const save = <FontAwesomeIcon icon={faSave} />;
 
 export default function AddNewPassword() {
   return (
@@ -19,8 +23,10 @@ export default function AddNewPassword() {
             placeholder="Your password in plain text. Don't worry it will be encrypted."
           ></input>
           <div className="mt-3 text-center">
-            <button className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-md">
+            <button className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-m">
               Save
+              <>&nbsp;</>
+              {save}
             </button>
           </div>
         </form>

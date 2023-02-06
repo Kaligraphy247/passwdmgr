@@ -39,7 +39,7 @@ export default function QuickLinks() {
         </button>
 
         <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-          <Link href="/settings">Wrench {settings}</Link>
+          <Link href="/settings">Settings {settings}</Link>
         </button>
       </div>
     </>
