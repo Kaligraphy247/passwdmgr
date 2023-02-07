@@ -178,20 +178,31 @@ async function addNewPassword(userId, website, password) {
 // addNewPassword(1, "Dummy", "dummy-password");
 
 async function fetchAllPasswords(id) {
-  let passwords = JSON.stringify(
-    await Password.findAll({ where: { userId: id } }),
-    null,
-    2
+  let tempArray = [];
+  // let passwords = await Password.findAll({ where: { userId: id } });
+  let allPasswords = [];
+  await Password.findAll({ where: { userId: id } }).then((data) =>
+    tempArray.push(data)
   );
 
-  return passwords;
-}
-// * How to use fetchAllPasswords
-// let o = fetchAllPasswords(1).then((passwd) => {
-//   console.log(passwd);
-// });
-// console.log(o);
+  for (let i = 0; i < tempArray[0].length; i++) {
+    //* convert dataValues.createdAt to `toLocaleString`
+    tempArray[0][i].dataValues.createdAt =
+      tempArray[0][i].dataValues.createdAt.toLocaleString();
 
+    //* convert dataValues.updatedAt to `toLocaleString`
+    tempArray[0][i].dataValues.updatedAt =
+      tempArray[0][i].dataValues.updatedAt.toLocaleString();
+
+    //* finally push to main array
+    allPasswords.push(tempArray[0][i].dataValues);
+  }
+  // console.log(allPasswords);
+  //* return allPasswords
+  return allPasswords;
+}
+
+//* fetch only one password
 async function fetchOnePassword(id) {
   let password = await Password.findOne({ where: { id: id } });
   // console.log(password.toJSON());
@@ -254,3 +265,5 @@ async function deletePassword(id) {
 
 // * test
 // deletePassword(3);
+
+export { fetchAllPasswords, fetchOnePassword };

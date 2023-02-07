@@ -25,9 +25,11 @@ export default function App() {
       </div>
 
       <div>
-        {s === 0 ? <NoRecent /> : <RecentlySaved />}
+        {s === 1 ? <NoRecent /> : <RecentlySaved />}
         <QuickLinks />
       </div>
     </div>
   );
 }
+
+// https://stackoverflow.com/questions/58075798/dynamic-routing-with-multiple-parameters-in-next-js

@@ -13,9 +13,9 @@ restore_sites = [
     "https://fontawesome.com/search",
     "https://fontawesome.com/docs/web/use-with/react/add-icons#add-individual-icons-explicitly",
     "https://w3collective.com/autocomplete-search-javascript/",
-    "https://sequelize.org/docs/v6/core-concepts/assocs/",
-    " https://sequelize.org/docs/v6/core-concepts/model-querying-basics/",
-    "https://sequelize.org/docs/v6/other-topics/transactions/",
+    "https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props",
+    "https://nextjs.org/docs/api-routes/dynamic-api-routes",
+    # "https://next-auth.js.org/"
 ]
 
 print("Restoring previous session...\n")

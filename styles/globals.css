@@ -27,7 +27,7 @@ ul {
   position: relative;
 }
 
-ul:after {
+/* ul:after {
   content: "";
   position: absolute;
   z-index: 1;
@@ -39,4 +39,4 @@ ul:after {
       rgba(243, 244, 247, 1) 90%);
   width: 100%;
   height: 4em;
-}
+} */
