@@ -3,9 +3,12 @@ import SearchBar from "../components/search";
 import QuickLinks from "../components/quickLinks";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFileCirclePlus,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
-const plus = <FontAwesomeIcon icon={faPlus} />;
+const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
 const search = <FontAwesomeIcon icon={faMagnifyingGlass} />;
 
 export default function App() {
@@ -17,11 +20,9 @@ export default function App() {
       <SearchBar />
       <div className="flex justify-between mb-1">
         <h3 className="text-2xl font-bold py-1">Recently saved passwords</h3>
-        <div>
-          <button className="px-2 py-1 mb-1 rounded text-lg shadow hover:shadow-md bg-green-500 text-white">
-            <Link href="/addNew">Add new {plus}</Link>
-          </button>
-        </div>
+        <button className="px-2 py-0.5 mb-1 rounded text-md shadow hover:shadow-md bg-green-500 text-white">
+          <Link href="/addNew">Add new {plus}</Link>
+        </button>
       </div>
 
       <div>

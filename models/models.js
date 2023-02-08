@@ -266,4 +266,4 @@ async function deletePassword(id) {
 // * test
 // deletePassword(3);
 
-export { fetchAllPasswords, fetchOnePassword };
+export { fetchAllPasswords, fetchOnePassword, addNewPassword };
