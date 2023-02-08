@@ -19,8 +19,8 @@ restore_sites = [
 ]
 
 print("Restoring previous session...\n")
-for site in restore_sites:
-    print(f'Restoring "{site}"...')
+for index, site in enumerate(restore_sites, 1):
+    print(f'{index}. Restoring "{site}"...')
     os.system(f"chrome.exe --incognito {site}")
 
 print(

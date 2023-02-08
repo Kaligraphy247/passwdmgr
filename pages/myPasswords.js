@@ -1,5 +1,6 @@
 import QuickLinks from "../components/quickLinks";
 import SearchBar from "../components/search";
+import ButtonWithTooltip from "../components/buttonWithTooltip";
 import { fetchAllPasswords } from "../models/models";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,6 +8,8 @@ import {
   faPenToSquare,
   faEye,
   faEyeSlash,
+  faClipboardList,
+  faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
@@ -14,8 +17,8 @@ const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
+const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 
-<i class="fa-solid fa-pen-to-square"></i>;
 export default function MyPasswords({ data }) {
   return (
     <>
@@ -35,10 +38,16 @@ export default function MyPasswords({ data }) {
                 <Link href="">{website}</Link>
               </p>
               <p className="px-2 blur-[7px] select-none truncate">{password}</p>
-              <span className="space-x-4">
-                <Link href="">{eye}</Link>
-                <Link href="">{pen}</Link>
-                <Link href="">{trash}</Link>
+              <span className="space-x-4 flex">
+                <ButtonWithTooltip message="Show">
+                  <button>{eye}</button>
+                </ButtonWithTooltip>
+                <ButtonWithTooltip message="Edit">
+                  <button>{pen}</button>
+                </ButtonWithTooltip>
+                <ButtonWithTooltip message="Delete">
+                  <button>{trash}</button>
+                </ButtonWithTooltip>
               </span>
             </li>
           ))}

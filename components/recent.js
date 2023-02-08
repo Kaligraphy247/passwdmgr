@@ -1,3 +1,4 @@
+import ButtonWithTooltip from "../components/buttonWithTooltip";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -16,8 +17,9 @@ export function RecentlySaved() {
           <p className="px-2 blur-[7px] select-none truncate">
             password password password
           </p>
-          <span className="space-x-4">
-            <Link href="">{eye}</Link>
+          <span className="space-x-4 flex">
+            {/* <Link href="">{eye}</Link> */}
+            <ButtonWithTooltip message="Show password">{eye}</ButtonWithTooltip>
           </span>
         </li>
         {/* todo */}
