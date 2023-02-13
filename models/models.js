@@ -204,18 +204,30 @@ async function fetchAllPasswords(id) {
 
 //* fetch only one password
 async function fetchOnePassword(id) {
-  let password = await Password.findOne({ where: { id: id } });
-  // console.log(password.toJSON());
-  return password.toJSON();
+  let tempArray = [];
+  let result = [];
+  await Password.findOne({ where: { id: id } }).then((data) =>
+    tempArray.push(data)
+  );
+
+  for (let i = 0; i < tempArray.length; i++) {
+    //* convert dataValues.createdAt to `toLocaleString`
+    tempArray[i].dataValues.createdAt =
+      tempArray[i].dataValues.createdAt.toLocaleString();
+
+    //* convert dataValues.updatedAt to `toLocaleString`
+    tempArray[i].dataValues.updatedAt =
+      tempArray[i].dataValues.updatedAt.toLocaleString();
+
+    //* finally push to main array
+    result.push(tempArray[i].dataValues);
+  }
+
+  //* return the  appropriate result
+  return result;
 }
 
-// * How to use fetchOnePasswords
-// let passwd = fetchOnePassword(2).then((passwd) => {
-//   console.log(passwd);
-//   // do something
-// });
-// console.log(passwd);
-
+// * update
 async function updatePassword(id, website, password) {
   await sequelize.sync();
   try {
@@ -266,4 +278,4 @@ async function deletePassword(id) {
 // * test
 // deletePassword(3);
 
-export { fetchAllPasswords, fetchOnePassword, addNewPassword };
+export { fetchAllPasswords, fetchOnePassword, addNewPassword, updatePassword };

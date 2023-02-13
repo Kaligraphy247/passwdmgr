@@ -14,6 +14,7 @@ import {
   faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
@@ -58,7 +59,16 @@ export default function MyPasswords({ data }) {
                     <button>{eye}</button>
                   </ButtonWithTooltip>
                   <ButtonWithTooltip message="Edit">
-                    <button>{pen}</button>
+                    <button>
+                      <Link
+                        href={{
+                          pathname: "/myPasswords/edit/[id]",
+                          query: { id: id },
+                        }}
+                      >
+                        {pen}
+                      </Link>
+                    </button>
                   </ButtonWithTooltip>
                   <ButtonWithTooltip message="Delete">
                     <button>{trash}</button>
@@ -73,6 +83,7 @@ export default function MyPasswords({ data }) {
     </>
   );
 }
+
 export async function getServerSideProps() {
   const data = await fetchAllPasswords(1);
   return { props: { data } };
