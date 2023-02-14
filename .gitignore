@@ -8,3 +8,4 @@ models/User.model.js
 models/Password.model.js
 data/sport.sqlite3
 data/myPasswords.sqlite
+components/modal.js

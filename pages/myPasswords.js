@@ -14,7 +14,9 @@ import {
   faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import DeleteModal from "../components/modal";
+import { DeleteModal } from "../components/modal";
+import { useEffect, useState } from "react";
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
@@ -26,6 +28,7 @@ const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 export default function MyPasswords({ data }) {
   // * get length of passwords, use it to render ui based on length
   let passwordsObjectLength = data.length;
+  const [showDelModal, setShowDelModal] = useState(false);
 
   // * render
   return (
@@ -71,7 +74,16 @@ export default function MyPasswords({ data }) {
                     </button>
                   </ButtonWithTooltip>
                   <ButtonWithTooltip message="Delete">
-                    <button>{trash}</button>
+                    <button>
+                      <Link
+                        href={{
+                          pathname: "/myPasswords/delete/[id]",
+                          query: { id: id },
+                        }}
+                      >
+                        {trash}
+                      </Link>
+                    </button>
                   </ButtonWithTooltip>
                 </span>
               </li>

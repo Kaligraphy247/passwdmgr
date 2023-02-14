@@ -50,8 +50,13 @@ export default function Single({ data }) {
 
       <div className="container">
         {data.map(({ id, website, password, createdAt, updatedAt }) => (
-          <>
-            <h3 className="text-2xl font-bold py-1">Edit "{website}"</h3>
+          <div key={id}>
+            <h3 className="text-2xl font-bold py-1">
+              Edit{" "}
+              <span className="bg-blue-200 rounded px-1 p-0.5 text-red-500">
+                {website}
+              </span>
+            </h3>
             <p className="">{savedStatus}</p>
             <form className="grid" onSubmit={handleSubmit} key={id}>
               <label className="text-lg pl-1 font-medium pt-2">Website</label>
@@ -93,10 +98,9 @@ export default function Single({ data }) {
                 </button>
               </div>
             </form>
-          </>
+          </div>
         ))}
       </div>
-
       <QuickLinks />
     </>
   );

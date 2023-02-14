@@ -15,6 +15,7 @@ restore_sites = [
     "https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props",
     "https://nextjs.org/docs/api-routes/dynamic-api-routes",
     "https://nextjs.org/docs/guides/building-forms",
+    "https://headlessui.com/react/dialog",
     # "https://next-auth.js.org/"
 ]
 
