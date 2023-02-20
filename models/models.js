@@ -202,6 +202,35 @@ async function fetchAllPasswords(id) {
   return allPasswords;
 }
 
+async function fetchRecentPassword(id) {
+  let tempArray = [];
+  let allPasswords = [];
+  await Password.findAll({
+    limit: 4,
+    order: [["updatedAt", "DESC"]],
+    where: { userId: id },
+  }).then((data) => tempArray.push(data));
+
+  for (let i = 0; i < tempArray[0].length; i++) {
+    //* convert dataValues.createdAt to `toLocaleString`
+    tempArray[0][i].dataValues.createdAt =
+      tempArray[0][i].dataValues.createdAt.toLocaleString();
+
+    //* convert dataValues.updatedAt to `toLocaleString`
+    tempArray[0][i].dataValues.updatedAt =
+      tempArray[0][i].dataValues.updatedAt.toLocaleString();
+
+    //* finally push to main array
+    allPasswords.push(tempArray[0][i].dataValues);
+  }
+  // console.log(allPasswords); //! debug
+  //* return allPasswords
+  return allPasswords;
+}
+
+//! test
+// fetchRecentPassword(1);
+
 //* fetch only one password
 async function fetchOnePassword(id) {
   let tempArray = [];
@@ -281,6 +310,7 @@ async function deletePassword(id) {
 export {
   fetchAllPasswords,
   fetchOnePassword,
+  fetchRecentPassword,
   addNewPassword,
   updatePassword,
   deletePassword,

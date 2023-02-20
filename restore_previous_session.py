@@ -15,8 +15,9 @@ restore_sites = [
     "https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props",
     "https://nextjs.org/docs/api-routes/dynamic-api-routes",
     "https://nextjs.org/docs/guides/building-forms",
-    "https://headlessui.com/react/dialog",
-    # "https://next-auth.js.org/"
+    # "https://headlessui.com/react/dialog",
+    # "https://next-auth.js.org/",
+    "https://dev.to/mgranados/how-to-build-a-simple-login-with-nextjs-and-react-hooks-255",
 ]
 
 print("Restoring previous session...\n")
