@@ -4,7 +4,7 @@ import { fetchOnePassword } from "/models/models.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
+import { AlertInfo } from "/components/alerts.js";
 const save = <FontAwesomeIcon icon={faSave} />;
 
 export default function Single({ data }) {
@@ -41,23 +41,22 @@ export default function Single({ data }) {
 
     //* get the response from the server as JSON.
     const result = await response.json();
-    setSavedStatus(result.data);
+    setSavedStatus(<AlertInfo message={result.data} />);
   }
 
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-2">Account name</h1>
-
+      <>{savedStatus}</>
       <div className="container">
         {data.map(({ id, website, password, createdAt, updatedAt }) => (
           <div key={id}>
             <h3 className="text-2xl font-bold py-1">
               Edit{" "}
-              <span className="bg-blue-200 rounded px-1 p-0.5 text-red-500">
+              <span className="bg-blue-100 rounded px-1 p-0.5 text-blue-500">
                 {website}
               </span>
             </h3>
-            <p className="">{savedStatus}</p>
             <form className="grid" onSubmit={handleSubmit} key={id}>
               <label className="text-lg pl-1 font-medium pt-2">Website</label>
               <input

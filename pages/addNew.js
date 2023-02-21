@@ -3,11 +3,13 @@ import QuickLinks from "../components/quickLinks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { AlertInfo } from "/components/alerts.js";
 
 const save = <FontAwesomeIcon icon={faSave} />;
 
 export default function AddNewPassword() {
   const [pTag, setPTag] = useState(""); // todo remove me
+  const [hiddenState, setHiddenState] = useState("true");
   async function handleSubmit(event) {
     // prevent browser from reloading page
     event.preventDefault();
@@ -43,11 +45,17 @@ export default function AddNewPassword() {
     // get the response from the server as JSON.
     const result = await response.json();
     // console.log(result.data); //? debug
-    setPTag(result.data.website); // todo remove me
+    // setPTag(result.data); // todo remove me
+    setPTag(<AlertInfo message={result.data} />);
 
     // * reset fields
     event.target.website.value = "";
     event.target.password.value = "";
+
+    //? not used at the end.
+    // setTimeout(() => {
+    //   window.location.reload(false);
+    // }, 2500);
   }
 
   return (
@@ -55,7 +63,7 @@ export default function AddNewPassword() {
       <h1 className="text-3xl font-bold text-center mb-2">Add New Password</h1>
       {/* todo remove me */}
       <h3 className="text-2xl font-bold py-1">Securely store your password</h3>
-      <p>{pTag}</p>
+      <>{pTag}</>
       <div className="container">
         <form className="grid" onSubmit={handleSubmit}>
           <label className="text-lg pl-1 font-medium">Account</label>

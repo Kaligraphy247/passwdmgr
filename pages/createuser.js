@@ -2,28 +2,12 @@ import QuickLinks from "../components/quickLinks";
 import SearchBar from "../components/search";
 import { NoRecent } from "../components/recent";
 import ButtonWithTooltip from "../components/buttonWithTooltip";
-// import { fetchAllPasswords } from "../models/models";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPenToSquare,
-  faEye,
-  faEyeSlash,
-  faClipboardList,
-  faFileCirclePlus,
-  faCopy,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { DeleteModal } from "../components/modal";
 import { useState } from "react";
+import { AlertInfo } from "/components/alerts.js";
 
-const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
-const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
-const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
-const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
-const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
-const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 const newUser = <FontAwesomeIcon icon={faUserPlus} className="pt-1 " />;
 
 export default function CreateUser({ data }) {
@@ -64,7 +48,7 @@ export default function CreateUser({ data }) {
     // get the response from the server as JSON.
     const result = await response.json();
     // console.log(result.data); //? debug
-    setPTag(result.data); // todo remove me
+    setPTag(<AlertInfo message={result.data} />); // todo remove me
 
     // * reset fields
     event.target.firstName.value = "";

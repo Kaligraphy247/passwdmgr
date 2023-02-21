@@ -10,6 +10,7 @@ import {
   faEye,
   faPenToSquare,
   faTrash,
+  faXmarkCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import ButtonWithTooltip from "../components/buttonWithTooltip";
 

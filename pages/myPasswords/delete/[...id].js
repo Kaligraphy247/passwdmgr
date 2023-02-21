@@ -3,6 +3,7 @@ import QuickLinks from "/components/quickLinks";
 import { fetchOnePassword } from "/models/models.js";
 import { useState } from "react";
 import Link from "next/link";
+import { AlertInfo } from "/components/alerts";
 
 export default function Single({ data }) {
   //* constants
@@ -37,7 +38,7 @@ export default function Single({ data }) {
 
     //* get the response from the server as JSON.
     const result = await response.json();
-    setDeleteStatus(result.data);
+    setDeleteStatus(<AlertInfo message={result.data} />);
   }
 
   return (
@@ -45,13 +46,13 @@ export default function Single({ data }) {
       <h1 className="text-3xl font-bold text-center mb-2">
         Delete Account Data
       </h1>
-      <p>{deleteStatus}</p>
+      <>{deleteStatus}</>
       <div className="container">
         {data.map(({ id, website }) => (
           <form onSubmit={handleSubmit} key={id}>
             <h1 className="text-2xl font-bold mb-2 text-center">
               Are you sure you want to delete Account -{" "}
-              <span className="bg-blue-200 rounded px-1 p-0.5 text-red-500">
+              <span className="bg-blue-100 rounded px-1 p-0.5 text-blue-500">
                 {website}
               </span>
               ?

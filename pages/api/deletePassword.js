@@ -11,10 +11,9 @@ export default function deletePasswordHandler(req, res) {
   // implicit else
   //* delete from db
   if (body.delete === "yes") {
-    console.log("The right block, do action");
     deletePassword(body.id);
     return res.status(200).json({ data: "Deleted!" });
   } else {
-    return res.status(200).json({ data: "Nothing Happened" });
+    return res.status(200).json({ data: "Nothing Happened 🤷‍♀️" });
   }
 }

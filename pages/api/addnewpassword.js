@@ -4,10 +4,12 @@ export default function addNewPasswordHandler(req, res) {
   const body = req.body;
 
   if (!body.website || !body.password) {
-    return res.status(400).json({ data: "account name or password not found" });
+    return res
+      .status(400)
+      .json({ data: "Account name, or password not found!" });
   }
   // implicit else
   //* save to db
   addNewPassword(1, body.website, body.password);
-  res.status(200).json({ data: body });
+  res.status(200).json({ data: "Saved!" });
 }

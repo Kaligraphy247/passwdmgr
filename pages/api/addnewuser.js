@@ -12,7 +12,7 @@ export default async function addNewUserHandler(req, res) {
   if (body.password.length < 4) {
     return await res
       .status(400)
-      .json({ data: "Passwords are too short. min (4)." });
+      .json({ data: "Password is too short. min (4)." });
   }
 
   if (
