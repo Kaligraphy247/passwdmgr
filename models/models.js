@@ -1,3 +1,5 @@
+import { defaults } from "autoprefixer";
+
 const { Sequelize, DataTypes, Model, Op, where } = require("sequelize");
 
 const sequelize = new Sequelize({
@@ -113,13 +115,7 @@ async function createNewUser(firstName, lastName, masterPassword) {
   }
 }
 // * test
-// createNewUser("James2", "Bond2", "master-password");
-// let james = async () => {
-//   let j = await User.findByPk(1);
-//   // j = j.toJSON();
-//   console.log(await j.changeMasterPassword("master-pass"));
-// };
-// console.log(james());
+// createNewUser("James3", "Bond3", "master-password");
 
 async function updateUserInfo(id, firstName, lastName) {
   await sequelize.sync();
@@ -314,4 +310,5 @@ export {
   addNewPassword,
   updatePassword,
   deletePassword,
+  createNewUser,
 };

@@ -12,7 +12,7 @@ export default function AddNewPassword() {
     // prevent browser from reloading page
     event.preventDefault();
 
-    //* read data from form normally
+    //? read data from form normally
     const form = event.target;
     const formData = new FormData(form);
 
@@ -22,7 +22,7 @@ export default function AddNewPassword() {
       password: event.target.password.value,
     };
     //* set endpoint
-    const endpoint = "/api/addNew";
+    const endpoint = "/api/addnewpassword";
 
     //* Form the request for sending data to the server
     const options = {
