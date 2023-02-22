@@ -1,15 +1,15 @@
-//*
 import QuickLinks from "../components/quickLinks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { AlertInfo } from "/components/alerts.js";
+import { withSessionSsr } from "./lib/config/withSession";
+import Head from "next/head";
 
 const save = <FontAwesomeIcon icon={faSave} />;
 
-export default function AddNewPassword() {
+export default function AddNewPassword({ user }) {
   const [pTag, setPTag] = useState(""); // todo remove me
-  const [hiddenState, setHiddenState] = useState("true");
   async function handleSubmit(event) {
     // prevent browser from reloading page
     event.preventDefault();
@@ -20,6 +20,7 @@ export default function AddNewPassword() {
 
     // preferable when using event handlers
     const data = {
+      id: user.id,
       website: event.target.website.value,
       password: event.target.password.value,
     };
@@ -45,7 +46,6 @@ export default function AddNewPassword() {
     // get the response from the server as JSON.
     const result = await response.json();
     // console.log(result.data); //? debug
-    // setPTag(result.data); // todo remove me
     setPTag(<AlertInfo message={result.data} />);
 
     // * reset fields
@@ -60,6 +60,9 @@ export default function AddNewPassword() {
 
   return (
     <>
+      <Head>
+        <title>Add New Password</title>
+      </Head>
       <h1 className="text-3xl font-bold text-center mb-2">Add New Password</h1>
       {/* todo remove me */}
       <h3 className="text-2xl font-bold py-1">Securely store your password</h3>
@@ -96,3 +99,20 @@ export default function AddNewPassword() {
     </>
   );
 }
+
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // implicit else
+  return {
+    props: { user },
+  };
+});

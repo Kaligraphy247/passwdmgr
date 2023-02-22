@@ -10,6 +10,6 @@ export default function addNewPasswordHandler(req, res) {
   }
   // implicit else
   //* save to db
-  addNewPassword(1, body.website, body.password);
+  addNewPassword(body.id, body.website, body.password);
   res.status(200).json({ data: "Saved!" });
 }

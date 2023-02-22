@@ -29,8 +29,8 @@ function closeAlert() {
 
 export function AlertInfo({ message }) {
   return (
-    <div class="alert-info">
-      {/* <span class="closebtn float-right" onClick={closeAlert}>
+    <div className="alert-info">
+      {/* <span className="closebtn float-right" onClick={closeAlert}>
         {x}
       </span> */}
       <p>{message}</p>
@@ -40,8 +40,8 @@ export function AlertInfo({ message }) {
 
 export function AlertSuccess({ message }) {
   return (
-    <div class="alert-success">
-      <span class="closebtn float-right" onClick={closeAlert}>
+    <div className="alert-success">
+      <span className="closebtn float-right" onClick={closeAlert}>
         {x}
       </span>
       <p>{message}</p>
@@ -51,8 +51,8 @@ export function AlertSuccess({ message }) {
 
 export function AlertError({ message }) {
   return (
-    <div class="alert-error">
-      <span class="closebtn float-right" onClick={closeAlert}>
+    <div className="alert-error">
+      <span className="closebtn float-right" onClick={closeAlert}>
         {x}
       </span>
       <p>{message}</p>
@@ -62,8 +62,8 @@ export function AlertError({ message }) {
 
 export function AlertWarning({ message }) {
   return (
-    <div class="alert-warning">
-      <span class="closebtn float-right" onClick={closeAlert}>
+    <div className="alert-warning">
+      <span className="closebtn float-right" onClick={closeAlert}>
         {x}
       </span>
       <p>{message}</p>

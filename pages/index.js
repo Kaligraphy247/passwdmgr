@@ -1,8 +1,10 @@
 import { RecentlySaved, NoRecent } from "../components/recent";
 import SearchBar from "../components/search";
 import QuickLinks from "../components/quickLinks";
+import { AlertInfo } from "/components/alerts";
 import Link from "next/link";
-import { fetchRecentPassword } from "../models/models";
+import Head from "next/head";
+import { fetchRecentPasswords } from "../models/models";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileCirclePlus,
@@ -10,9 +12,10 @@ import {
   faEye,
   faPenToSquare,
   faTrash,
-  faXmarkCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import ButtonWithTooltip from "../components/buttonWithTooltip";
+import { useState } from "react";
+import { withSessionSsr } from "./lib/config/withSession";
 
 const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
 const search = <FontAwesomeIcon icon={faMagnifyingGlass} />;
@@ -20,28 +23,27 @@ const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="pt-1" />;
 
-export default function App({ data }) {
+export default function App({ data, user }) {
+  const [userStatus, setUserStatus] = useState("");
   let passwordsObjectLength = data.length;
-  const name = "James";
 
-  const tempFunc = () => {
-    // window.confirm("yes");
-    let username = window.prompt("Please enter your username");
-    // console.log(username.toLowerCase()); //! debug
-    let password = window.prompt("Please enter your master password");
-    // console.log(password.toLowerCase()); //! debug
-  };
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mb-2">Welcome, {name}</h1>
+      <Head>
+        <title>Password Manager</title>
+      </Head>
+      <h1 className="text-3xl font-bold text-center mb-2">
+        Welcome, {user.firstName}.
+      </h1>
       <SearchBar />
       <div className="flex justify-between mb-1">
         <h3 className="text-2xl font-bold py-1">Recently saved passwords</h3>
+
         <button className="px-2 py-0.5 mb-1 rounded text-md shadow hover:shadow-md bg-green-500 text-white">
           <Link href="/addNew">Add new {plus}</Link>
         </button>
       </div>
-
+      <>{userStatus}</>
       <div>
         {passwordsObjectLength < 1 ? (
           <NoRecent />
@@ -61,7 +63,7 @@ export default function App({ data }) {
                   </p>
                   <span className="space-x-4 flex">
                     <ButtonWithTooltip message="Show">
-                      <button onClick={tempFunc}>{eye}</button>
+                      <button>{eye}</button>
                     </ButtonWithTooltip>
                     <ButtonWithTooltip message="Edit">
                       <button>
@@ -99,8 +101,20 @@ export default function App({ data }) {
   );
 }
 
-// https://stackoverflow.com/questions/58075798/dynamic-routing-with-multiple-parameters-in-next-js
-export async function getServerSideProps() {
-  const data = await fetchRecentPassword(1);
-  return { props: { data } };
-}
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // implicit else
+  const data = await fetchRecentPasswords(user.id);
+  return {
+    props: { user, data },
+  };
+});

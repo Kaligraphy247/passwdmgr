@@ -14,9 +14,10 @@ import {
   faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-// import DeleteModal from "../components/modal";
+import Head from "next/head";
 import { DeleteModal } from "../components/modal";
 import { useEffect, useState } from "react";
+import { withSessionSsr } from "./lib/config/withSession";
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
@@ -28,11 +29,13 @@ const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 export default function MyPasswords({ data }) {
   // * get length of passwords, use it to render ui based on length
   let passwordsObjectLength = data.length;
-  const [showDelModal, setShowDelModal] = useState(false);
 
   // * render
   return (
     <>
+      <Head>
+        <title>Password Manager | My passwords</title>
+      </Head>
       <h1 className="text-3xl font-bold text-center mb-2">My Passwords</h1>
       <SearchBar />
       <div className="flex justify-between mb-1">
@@ -96,7 +99,20 @@ export default function MyPasswords({ data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const data = await fetchAllPasswords(1);
-  return { props: { data } };
-}
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // implicit else
+  const data = await fetchAllPasswords(user.id);
+  return {
+    props: { user, data },
+  };
+});

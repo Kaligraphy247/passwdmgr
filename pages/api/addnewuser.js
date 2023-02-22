@@ -1,7 +1,7 @@
 import { createNewUser } from "/models/models";
 export default async function addNewUserHandler(req, res) {
   // get data submitted in req body
-  const body = req.body; //? try deconstructing instead, in the future
+  const body = req.body; // ? try deconstructing instead, in the future
   // ? example
   // const { firstName, username, password, confirmPassword } = req.body;
 

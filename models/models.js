@@ -1,5 +1,3 @@
-import { defaults } from "autoprefixer";
-
 const { Sequelize, DataTypes, Model, Op, where } = require("sequelize");
 
 const sequelize = new Sequelize({
@@ -114,8 +112,33 @@ async function createNewUser(firstName, lastName, masterPassword) {
     console.log("An error occurred: ", error);
   }
 }
-// * test
-// createNewUser("James3", "Bond3", "master-password");
+
+//* fetch only one user
+async function fetchOneUser(lastName, password) {
+  let tempArray = [];
+  let result = [];
+  await User.findOne({
+    where: { lastName: lastName, masterPassword: password },
+  }).then((data) => tempArray.push(data));
+
+  for (let i = 0; i < tempArray.length; i++) {
+    //* convert dataValues.createdAt to `toLocaleString`
+    tempArray[i].dataValues.createdAt =
+      tempArray[i].dataValues.createdAt.toLocaleString();
+
+    //* convert dataValues.updatedAt to `toLocaleString`
+    tempArray[i].dataValues.updatedAt =
+      tempArray[i].dataValues.updatedAt.toLocaleString();
+
+    //* finally push to main array
+    result.push(tempArray[i].dataValues);
+  }
+
+  // //* return the  appropriate result
+  console.log(result);
+  return result;
+}
+// fetchOneUser("Johnny");
 
 async function updateUserInfo(id, firstName, lastName) {
   await sequelize.sync();
@@ -198,7 +221,7 @@ async function fetchAllPasswords(id) {
   return allPasswords;
 }
 
-async function fetchRecentPassword(id) {
+async function fetchRecentPasswords(id) {
   let tempArray = [];
   let allPasswords = [];
   await Password.findAll({
@@ -306,9 +329,10 @@ async function deletePassword(id) {
 export {
   fetchAllPasswords,
   fetchOnePassword,
-  fetchRecentPassword,
+  fetchRecentPasswords,
   addNewPassword,
   updatePassword,
   deletePassword,
   createNewUser,
+  fetchOneUser,
 };

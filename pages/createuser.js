@@ -1,12 +1,10 @@
 import QuickLinks from "../components/quickLinks";
-import SearchBar from "../components/search";
-import { NoRecent } from "../components/recent";
-import ButtonWithTooltip from "../components/buttonWithTooltip";
+import { AlertInfo } from "/components/alerts.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Head from "next/head";
 import { useState } from "react";
-import { AlertInfo } from "/components/alerts.js";
 
 const newUser = <FontAwesomeIcon icon={faUserPlus} className="pt-1 " />;
 
@@ -59,6 +57,9 @@ export default function CreateUser({ data }) {
   // * render
   return (
     <>
+      <Head>
+        <title>Create a new user Account</title>
+      </Head>
       <h1 className="text-3xl font-bold text-center mb-2">
         Create a new User Account
       </h1>
@@ -103,6 +104,13 @@ export default function CreateUser({ data }) {
             </button>
           </div>
         </form>
+        <p className="text-xs">
+          Already have an account ?{" "}
+          <Link href="/createuser" className="text-red-500 hover:text-blue-600">
+            Login
+          </Link>{" "}
+          instead.
+        </p>
       </div>
       <QuickLinks />
     </>
