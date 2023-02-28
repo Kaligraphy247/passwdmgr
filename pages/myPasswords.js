@@ -12,11 +12,13 @@ import {
   faClipboardList,
   faFileCirclePlus,
   faCopy,
+  fas,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
 import { DeleteModal } from "../components/modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { withSessionSsr } from "./lib/config/withSession";
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
@@ -26,22 +28,53 @@ const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
 const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 
-export default function MyPasswords({ data }) {
+export default function MyPasswords({ data, user }) {
+  const router = useRouter();
+
   // * get length of passwords, use it to render ui based on length
   let passwordsObjectLength = data.length;
+  let [passwdIsBlurred, setPasswdIsBlurred] = useState(true);
+  let [buttonToolTipMessage, setButtonToolTipMessage] = useState("show");
 
+  // ! under construction
+  // let [buttonToolTipLabel, setButtonToolTipLabel] = useState({ eye });
+  // let [showClipboard, setShowClipboard] = useState();
+
+  // let nearPerfectData = data.filter()
+  // ! end
+
+  const showPassword = (passwdId) => {
+    let showCleanPassword = document.getElementById(`passwdID_${passwdId}`);
+
+    if (passwdIsBlurred === true) {
+      setPasswdIsBlurred(false);
+      showCleanPassword.classList.replace("blur-[7px]", "blur-0");
+      setButtonToolTipMessage("hide");
+    } else if (passwdIsBlurred === false) {
+      setPasswdIsBlurred(true);
+      showCleanPassword.classList.replace("blur-0", "blur-[7px]");
+      setButtonToolTipMessage("show");
+    }
+  };
   // * render
   return (
     <>
       <Head>
         <title>Password Manager | My passwords</title>
       </Head>
-      <h1 className="text-3xl font-bold text-center mb-2">My Passwords</h1>
+      <h1 className="text-3xl font-bold text-center mb-2">
+        {user.firstName}'s Passwords
+      </h1>
       <SearchBar />
       <div className="flex justify-between mb-1">
         <h3 className="text-2xl font-bold py-1">Recently saved passwords</h3>
-        <button className="px-2 py-0.5 mb-1 rounded text-md shadow hover:shadow-md bg-green-500 text-white">
-          <Link href="/addNew">Add new {plus}</Link>
+        <button
+          className="px-2 py-0.5 mb-1 rounded text-md shadow hover:shadow-md bg-green-500 text-white"
+          onClick={() => {
+            router.push("/addNew");
+          }}
+        >
+          Add new {plus}
         </button>
       </div>
       {passwordsObjectLength < 1 ? (
@@ -53,16 +86,23 @@ export default function MyPasswords({ data }) {
               <li
                 className="flex justify-between p-2 rounded shadow hover:bg-slate-100 hover:shadow-slate-400 mb-5"
                 key={id}
+                {...passwdIsBlurred}
               >
                 <p className="truncate">
-                  <Link href="">{website}</Link>
+                  <Link href="">
+                    {website}
+                    {/* . */}
+                  </Link>
                 </p>
-                <p className="px-2 blur-[7px] select-none truncate">
+                <p
+                  className="px-2 blur-[7px] select-none truncate"
+                  id={`passwdID_${id}`}
+                >
                   {password}
                 </p>
                 <span className="space-x-4 flex">
-                  <ButtonWithTooltip message="Show">
-                    <button>{eye}</button>
+                  <ButtonWithTooltip message={buttonToolTipMessage}>
+                    <button onClick={() => showPassword(id)}>{eye}</button>
                   </ButtonWithTooltip>
                   <ButtonWithTooltip message="Edit">
                     <button>

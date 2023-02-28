@@ -32,25 +32,51 @@ export default function QuickLinks() {
     <>
       <div className="mt-6 text-center space-x-4">
         {asPath !== "/" ? (
-          <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-            <Link href="/">Home {home}</Link>
+          <button
+            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            {/* <Link href="/"></Link> */}
+            Home {home}
           </button>
         ) : (
-          <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-            <Link href="/myPasswords">All {folder}</Link>
+          <button
+            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+            onClick={() => {
+              router.push("/myPasswords");
+            }}
+          >
+            All {folder}
           </button>
         )}
 
-        <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-          <Link href="/importPassword">Import {fileImport}</Link>
+        <button
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          onClick={() => {
+            router.push("/importPassword");
+          }}
+        >
+          Import {fileImport}
         </button>
 
-        <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-          <Link href="/exportPassword">Export {fileExport}</Link>
+        <button
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          onClick={() => {
+            router.push("/exportPassword");
+          }}
+        >
+          Export {fileExport}
         </button>
 
-        <button className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300">
-          <Link href="/settings">Settings {settings}</Link>
+        <button
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          onClick={() => {
+            router.push("/settings");
+          }}
+        >
+          Settings {settings}
         </button>
 
         <button

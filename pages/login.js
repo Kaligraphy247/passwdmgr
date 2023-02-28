@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import Head from "next/head";
 import QuickLinks from "../components/quickLinks";
+import { AlertInfo } from "/components/alerts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -10,6 +11,7 @@ const login = <FontAwesomeIcon icon={faRightToBracket} className="pt-1" />;
 
 export default function Login() {
   const router = useRouter();
+  const [msg, setMsg] = useState();
   const usernameInput = useRef();
   const passwordInput = useRef();
 
@@ -33,9 +35,12 @@ export default function Login() {
       body: JSON.stringify(data),
     };
     const response = await fetch(endpoint, options);
-
     if (response.ok) {
       return router.push("/");
+    } else {
+      setMsg(
+        <AlertInfo message="Your password is probably wrong, please check and try again." />
+      );
     }
   };
 
@@ -46,7 +51,7 @@ export default function Login() {
         <title>Login | Password Manager</title>
       </Head>
       <h1 className="text-3xl font-bold text-center mb-2">Login</h1>
-      {/* <p>{pTag}</p> */}
+      <p>{msg}</p>
       <div className="container">
         <form className="grid" onSubmit={handleSubmit}>
           <label className="font-semibold text-xl">Username</label>

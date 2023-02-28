@@ -20,7 +20,7 @@ async function createSessionRoute(req, res) {
       req.session.user = currentUser[0];
 
       await req.session.save();
-      res.send({ ok: true });
+      res.json({ ok: true }); //, err: "Passwords do not match or something else." });
     }
     return res.status(403).send("403 ERROR CODE!");
   }
