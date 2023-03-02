@@ -38,14 +38,20 @@ export default function App({ data, user }) {
 
     if (passwdIsBlurred === true) {
       setPasswdIsBlurred(false);
-      showCleanPassword.classList.replace("blur-[7px]", "blur-0");
+      showCleanPassword.classList.remove("blur-[7px]", "select-none");
+      showCleanPassword.classList.add("blur-0");
       setButtonToolTipMessage("hide");
+      // setShowClipboard(true);
     } else if (passwdIsBlurred === false) {
       setPasswdIsBlurred(true);
-      showCleanPassword.classList.replace("blur-0", "blur-[7px]");
+      showCleanPassword.classList.remove("blur-0");
+      showCleanPassword.classList.add("blur-[7px]", "select-none");
       setButtonToolTipMessage("show");
+      // setShowClipboard(false);
     }
   };
+
+  // * render
   return (
     <div>
       <Head>

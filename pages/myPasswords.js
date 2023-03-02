@@ -35,12 +35,13 @@ export default function MyPasswords({ data, user }) {
   let passwordsObjectLength = data.length;
   let [passwdIsBlurred, setPasswdIsBlurred] = useState(true);
   let [buttonToolTipMessage, setButtonToolTipMessage] = useState("show");
+  let [showClipboard, setShowClipboard] = useState(false);
 
   // ! under construction
-  // let [buttonToolTipLabel, setButtonToolTipLabel] = useState({ eye });
-  // let [showClipboard, setShowClipboard] = useState();
-
   // let nearPerfectData = data.filter()
+
+  let [clip, setClip] = useState(" ");
+  let [buttonToolTipLabel, setButtonToolTipLabel] = useState(eye);
   // ! end
 
   const showPassword = (passwdId) => {
@@ -48,19 +49,28 @@ export default function MyPasswords({ data, user }) {
 
     if (passwdIsBlurred === true) {
       setPasswdIsBlurred(false);
-      showCleanPassword.classList.replace("blur-[7px]", "blur-0");
+      showCleanPassword.classList.remove("blur-[7px]", "select-none");
+      showCleanPassword.classList.add("blur-0");
       setButtonToolTipMessage("hide");
+      // setShowClipboard(true);
     } else if (passwdIsBlurred === false) {
       setPasswdIsBlurred(true);
-      showCleanPassword.classList.replace("blur-0", "blur-[7px]");
+      showCleanPassword.classList.remove("blur-0");
+      showCleanPassword.classList.add("blur-[7px]", "select-none");
       setButtonToolTipMessage("show");
+      // setShowClipboard(false);
     }
   };
+
+  const toEditPage = (id) => {
+    router.push(`/myPasswords/edit/${[id]}`);
+  };
+
   // * render
   return (
     <>
       <Head>
-        <title>Password Manager | My passwords</title>
+        <title>My passwords | Password Manager</title>
       </Head>
       <h1 className="text-3xl font-bold text-center mb-2">
         {user.firstName}'s Passwords
@@ -101,31 +111,28 @@ export default function MyPasswords({ data, user }) {
                   {password}
                 </p>
                 <span className="space-x-4 flex">
-                  <ButtonWithTooltip message={buttonToolTipMessage}>
-                    <button onClick={() => showPassword(id)}>{eye}</button>
-                  </ButtonWithTooltip>
+                  <div>
+                    <ButtonWithTooltip message={buttonToolTipMessage}>
+                      <button onClick={() => showPassword(id)}>
+                        {/* {buttonToolTipLabel} */} {eye}
+                      </button>
+                    </ButtonWithTooltip>
+                  </div>
+
                   <ButtonWithTooltip message="Edit">
-                    <button>
-                      <Link
-                        href={{
-                          pathname: "/myPasswords/edit/[id]",
-                          query: { id: id },
-                        }}
-                      >
-                        {pen}
-                      </Link>
+                    <button
+                      onClick={() => router.push(`/myPasswords/edit/${[id]}`)}
+                    >
+                      {pen}
                     </button>
                   </ButtonWithTooltip>
                   <ButtonWithTooltip message="Delete">
-                    <button>
-                      <Link
-                        href={{
-                          pathname: "/myPasswords/delete/[id]",
-                          query: { id: id },
-                        }}
-                      >
-                        {trash}
-                      </Link>
+                    <button
+                      onClick={() => {
+                        router.push(`/myPasswords/delete/${[id]}`);
+                      }}
+                    >
+                      {trash}
                     </button>
                   </ButtonWithTooltip>
                 </span>
