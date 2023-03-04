@@ -11,6 +11,7 @@ import {
   faEyeSlash,
   faClipboardList,
   faFileCirclePlus,
+  faEllipsisVertical,
   faCopy,
   fas,
 } from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +26,9 @@ const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
+const more = (
+  <FontAwesomeIcon icon={faEllipsisVertical} className="mt-1 mr-2" />
+);
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
 const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 
@@ -110,23 +114,25 @@ export default function MyPasswords({ data, user }) {
                 >
                   {password}
                 </p>
-                <span className="space-x-4 flex">
-                  <div>
-                    <ButtonWithTooltip message={buttonToolTipMessage}>
-                      <button onClick={() => showPassword(id)}>
-                        {/* {buttonToolTipLabel} */} {eye}
-                      </button>
-                    </ButtonWithTooltip>
-                  </div>
 
-                  <ButtonWithTooltip message="Edit">
+                <span className="space-x-4 flex">
+                  {/* {more} */}
+                  <Actions id={id} />
+                  {/* <ButtonWithTooltip message={buttonToolTipMessage}>
+                    <button onClick={() => showPassword(id)}>
+                      {eye}
+                    </button>
+                  </ButtonWithTooltip> */}
+
+                  {/* <ButtonWithTooltip message="Edit">
                     <button
                       onClick={() => router.push(`/myPasswords/edit/${[id]}`)}
                     >
                       {pen}
                     </button>
-                  </ButtonWithTooltip>
-                  <ButtonWithTooltip message="Delete">
+                  </ButtonWithTooltip> */}
+
+                  {/* <ButtonWithTooltip message="Delete">
                     <button
                       onClick={() => {
                         router.push(`/myPasswords/delete/${[id]}`);
@@ -134,7 +140,7 @@ export default function MyPasswords({ data, user }) {
                     >
                       {trash}
                     </button>
-                  </ButtonWithTooltip>
+                  </ButtonWithTooltip> */}
                 </span>
               </li>
             ))}
@@ -142,6 +148,60 @@ export default function MyPasswords({ data, user }) {
         </div>
       )}
       <QuickLinks />
+    </>
+  );
+}
+
+function Actions({ id }) {
+  const router = useRouter();
+  let [passwdIsBlurred, setPasswdIsBlurred] = useState(true);
+  let [optionLabel, setOptionLabel] = useState("show");
+
+  const showPassword = (passwdId) => {
+    let showCleanPassword = document.getElementById(`passwdID_${passwdId}`);
+
+    if (passwdIsBlurred === true) {
+      setPasswdIsBlurred(false);
+      showCleanPassword.classList.remove("blur-[7px]", "select-none");
+      showCleanPassword.classList.add("blur-0");
+      setOptionLabel("hide");
+    } else if (passwdIsBlurred === false) {
+      setPasswdIsBlurred(true);
+      showCleanPassword.classList.remove("blur-0");
+      showCleanPassword.classList.add("blur-[7px]", "select-none");
+      setOptionLabel("hide");
+    }
+  };
+  return (
+    <>
+      <select
+        onChange={(e) => {
+          const optionValue = e.target.value;
+          if (optionValue === "show") {
+            console.log(optionValue);
+            showPassword(id);
+          }
+          if (optionValue === "hide") {
+            console.log(optionValue);
+            showPassword(id);
+          }
+          if (optionValue === "edit") {
+            console.log(optionValue);
+            router.push(`/myPasswords/edit/${[id]}`);
+          } else if (optionValue === "delete") {
+            console.log(optionValue);
+            router.push(`/myPasswords/delete/${[id]}`);
+          }
+        }}
+        className="w-20 h-5 text-xs border border-solid border-blue-200 bg-blue-100 rounded shadow-md focus:outline-none"
+      >
+        <option disabled defaultValue selected>
+          Select
+        </option>
+        <option value={optionLabel}>{optionLabel}</option>
+        <option value="edit">Edit</option>
+        <option value="delete">Delete</option>
+      </select>
     </>
   );
 }
