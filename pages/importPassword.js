@@ -1,5 +1,6 @@
 import Head from "next/head";
 import QuickLinks from "../components/quickLinks";
+import { withSessionSsr } from "./lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImport,
@@ -26,13 +27,13 @@ export default function ImportPasswords() {
         </h2>
 
         <form className="border-2 py-2 px-1 border-dotted">
-          <div className="pb-3 text-sm">
+          <div className="pb-3 text-sm text-center">
             <p>
               <span className="text-blue-600">{info}</span> Only works on
               passwords exported from{" "}
               <Link
                 href="/exportPassword"
-                className="hover:text-red-500 text-blue-700"
+                className="hover:text-purple-500 text-blue-700"
               >
                 Export {fileExport}
               </Link>
@@ -53,3 +54,18 @@ export default function ImportPasswords() {
     </>
   );
 }
+
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { user },
+  };
+});

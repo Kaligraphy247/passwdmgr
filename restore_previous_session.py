@@ -8,16 +8,18 @@ restore_sites = [
     "http://localhost:3000",
     "https://duckduckgo.com",
     "https://duckduckgo.com/?q=sequelize+with+nextjs",
-    "https://sequelize.org/docs/v6/core-concepts/model-basics/",
+    # "https://sequelize.org/docs/v6/core-concepts/model-basics/",
     "https://fontawesome.com/search",
     "https://fontawesome.com/docs/web/use-with/react/add-icons#add-individual-icons-explicitly",
-    "https://w3collective.com/autocomplete-search-javascript/",
-    "https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props",
-    "https://nextjs.org/docs/api-routes/dynamic-api-routes",
-    "https://nextjs.org/docs/guides/building-forms",
+    # "https://w3collective.com/autocomplete-search-javascript/",
+    # "https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props",
+    # "https://nextjs.org/docs/api-routes/dynamic-api-routes",
+    # "https://nextjs.org/docs/guides/building-forms",
     # "https://headlessui.com/react/dialog",
     # "https://next-auth.js.org/",
     # "https://dev.to/mgranados/how-to-build-a-simple-login-with-nextjs-and-react-hooks-255",
+    "https://stackoverflow.com/questions/61879580/nodejs-data-argument-must-be-of-type-string-buffer-typedarray-dataview-how-to",
+    "https://github.com/vercel/next.js/discussions/25981",
 ]
 
 print("Restoring previous session...\n")

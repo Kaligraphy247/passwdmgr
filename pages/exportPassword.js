@@ -1,5 +1,8 @@
 import Head from "next/head";
 import QuickLinks from "../components/quickLinks";
+import Link from "next/link";
+import { useState } from "react";
+import { withSessionSsr } from "./lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImport,
@@ -7,14 +10,41 @@ import {
   faFileExport,
   faDownload,
 } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 
 const fileImport = <FontAwesomeIcon icon={faFileImport} />;
 const info = <FontAwesomeIcon icon={faCircleInfo} />;
 const fileExport = <FontAwesomeIcon icon={faFileExport} />;
 const download = <FontAwesomeIcon icon={faDownload} />;
 
-export default function ExportPasswords() {
+export default function ExportPasswords({ user }) {
+  const [downloadState, setDownloadState] = useState("");
+  const [showDlBtn, setShowDlBtn] = useState(false);
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      id: user.id,
+    };
+    const endpoint = "/api/exportPassword";
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch(endpoint, options);
+
+    const result = await response.json();
+    if (result.ok) {
+      setDownloadState(`File is ready to download `);
+      setShowDlBtn(true);
+    }
+    // console.log(result);
+  };
+
   return (
     <>
       <Head>
@@ -28,31 +58,63 @@ export default function ExportPasswords() {
         </h2>
 
         <form className="border-2 py-2 px-1 border-dotted">
-          <div className="pb-3 text-sm">
+          <div className="pb-3 text-sm text-center">
             <p>
               <span className="text-blue-600">{info}</span> Suitable for files
               to be used for{" "}
               <Link
                 href="/importPassword"
-                className="hover:text-red-500 text-blue-700"
+                className="hover:text-violet-500 text-blue-700"
               >
                 Import {fileImport}
               </Link>
             </p>
           </div>
-          <input
-            type="file"
-            className="text-blue-500 text-sm file:text-blue-500 file:rounded file:px-2 file:py-1 file:border-none file:bg-blue-100 file:text-sm file:hover:bg-blue-200 file:hover:text-blue-600 focus:outline-blue-400"
-          />
           <div className="text-center">
-            <button className="border px-2 py-1 rounded font-semibold shadow-md">
+            <button
+              className="border px-2 py-1 rounded font-semibold shadow-md"
+              onClick={handleClick}
+            >
               Export {fileExport}
             </button>
           </div>
         </form>
-        <div className="py-2 px-1 mt-6">Ready to download {download}</div>
+        <div className="py-1 px-1 mt-2">
+          {downloadState}
+          {showDlBtn ? (
+            <Link
+              href="/exports/passwords.json"
+              alt="Passwords.json"
+              target="_blank"
+              download={true}
+              rel="noopener noreferrer"
+              className="hover:text-blue-500"
+            >
+              <>&nbsp;</>
+              {download}
+            </Link>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <QuickLinks />
     </>
   );
 }
+
+export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: { user },
+    };
+  }
+});
