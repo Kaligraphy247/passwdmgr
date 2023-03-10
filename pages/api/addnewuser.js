@@ -1,4 +1,6 @@
 import { createNewUser } from "/models/models";
+import { hashPassword } from "../lib/config/bcryptjs-config";
+
 export default async function addNewUserHandler(req, res) {
   // get data submitted in req body
   const body = req.body; // ? try deconstructing instead, in the future
@@ -24,7 +26,9 @@ export default async function addNewUserHandler(req, res) {
     return await res.status(400).json({ data: "All fields are required." });
   } else {
     //* save to db
-    createNewUser(body.firstName, body.username, body.password);
+    const hashedPassword = hashPassword(body.password);
+    console.log(hashedPassword);
+    createNewUser(body.firstName, body.username, hashedPassword);
     return await res.status(200).json({ data: "Success!" });
   }
 }

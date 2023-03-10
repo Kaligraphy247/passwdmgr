@@ -27,6 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "bcryptjs": "^2.4.3",
     "multiparty": "^4.2.3",
     "next-connect": "^0.13.0",
     "sequelize-cli": "^6.6.0"

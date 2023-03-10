@@ -63,7 +63,7 @@ export default function CreateUser({ data }) {
       <h1 className="text-3xl font-bold text-center mb-2">
         Create a new User Account
       </h1>
-      <p>{pTag}</p>
+      {pTag}
       <div className="container">
         <form className="grid" onSubmit={handleSubmit}>
           <label className="font-semibold text-xl">Name</label>

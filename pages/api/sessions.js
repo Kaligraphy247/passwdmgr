@@ -1,12 +1,13 @@
 import { withSessionRoute } from "/pages/lib/config/withSession";
 import { fetchOneUser } from "../../models/models";
+import { verifyPassword } from "../lib/config/bcryptjs-config";
 
 export default withSessionRoute(createSessionRoute);
 
 async function createSessionRoute(req, res) {
   if (req.method === "POST") {
     const { username, password } = req.body;
-    const currentUser = await fetchOneUser(username, password);
+    const currentUser = await fetchOneUser(username);
     // console.log("current ", currentUser[0]);
     if (!username || !password) {
       return res
@@ -15,7 +16,8 @@ async function createSessionRoute(req, res) {
     }
     if (
       username === currentUser[0].lastName &&
-      password === currentUser[0].masterPassword
+      verifyPassword(password, currentUser[0].masterPassword)
+      // password === currentUser[0].masterPassword
     ) {
       req.session.user = currentUser[0];
 

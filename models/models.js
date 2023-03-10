@@ -36,11 +36,11 @@ User.init(
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: true,
-      unique: false,
+      allowNull: false,
+      unique: true,
     },
     masterPassword: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(4096),
       allowNull: false,
       unique: false,
     },
@@ -114,11 +114,11 @@ async function createNewUser(firstName, lastName, masterPassword) {
 }
 
 //* fetch only one user
-async function fetchOneUser(lastName, password) {
+async function fetchOneUser(lastName) {
   let tempArray = [];
   let result = [];
   await User.findOne({
-    where: { lastName: lastName, masterPassword: password },
+    where: { lastName: lastName },
   }).then((data) => tempArray.push(data));
 
   for (let i = 0; i < tempArray.length; i++) {
