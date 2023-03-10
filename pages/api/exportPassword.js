@@ -9,7 +9,7 @@ export default async function exportPasswordHandler(req, res) {
   });
   // console.log(passwords);
   if (req.method === "POST") {
-    fs.writeFile(passwordFile, JSON.stringify(passwords), (err) => {
+    fs.writeFile(passwordFile, JSON.stringify(passwords, null, 2), (err) => {
       if (err) {
         throw err;
       }

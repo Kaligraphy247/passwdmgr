@@ -134,7 +134,7 @@ async function fetchOneUser(lastName, password) {
     result.push(tempArray[i].dataValues);
   }
 
-  // //* return the  appropriate result
+  //* return the  appropriate result
   console.log(result);
   return result;
 }
@@ -349,6 +349,28 @@ async function exportPassword(id) {
   return allPasswords;
 }
 
+async function importPassword(id, website, password) {
+  await sequelize.sync();
+  try {
+    const result = await sequelize.transaction(async (t) => {
+      let newPassword = await Password.update(
+        { website: website, password: password },
+        { where: { id: id } },
+        { transaction: t }
+      );
+
+      return newPassword;
+    });
+
+    // If the execution reaches this line, the transaction has been committed successfully
+    // `result` is whatever was returned from the transaction callback
+    return result;
+  } catch (error) {
+    // If the execution reaches this line, an error occurred.
+    console.log("An error occurred: ", error);
+  }
+}
+
 export {
   fetchAllPasswords,
   fetchOnePassword,
@@ -359,4 +381,5 @@ export {
   createNewUser,
   fetchOneUser,
   exportPassword,
+  importPassword,
 };
