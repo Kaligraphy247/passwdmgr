@@ -28,11 +28,11 @@ export function RecentlySaved() {
   );
 }
 
-export function NoRecent() {
+export function NoRecent({ message }) {
   return (
     <>
       <p className="border text-gray-400 text-center py-8 px-4 rounded">
-        Nothing available yet
+        {message}
       </p>
     </>
   );

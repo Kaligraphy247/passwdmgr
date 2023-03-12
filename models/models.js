@@ -371,6 +371,31 @@ async function importPassword(id, website, password) {
   }
 }
 
+async function searchForPassword(id, search) {
+  let tempArray = [];
+  // let passwords = await Password.findAll({ where: { userId: id } });
+  let searchResult = [];
+  await Password.findAll({
+    where: { userId: id, website: { [Op.substring]: search } },
+  }).then((data) => tempArray.push(data));
+
+  for (let i = 0; i < tempArray[0].length; i++) {
+    //* convert dataValues.createdAt to `toLocaleString`
+    tempArray[0][i].dataValues.createdAt =
+      tempArray[0][i].dataValues.createdAt.toLocaleString();
+
+    //* convert dataValues.updatedAt to `toLocaleString`
+    tempArray[0][i].dataValues.updatedAt =
+      tempArray[0][i].dataValues.updatedAt.toLocaleString();
+
+    //* finally push to main array
+    searchResult.push(tempArray[0][i].dataValues);
+  }
+  // console.log(allPasswords);
+  //* return searchResult
+  return searchResult;
+}
+
 export {
   fetchAllPasswords,
   fetchOnePassword,
@@ -382,4 +407,5 @@ export {
   fetchOneUser,
   exportPassword,
   importPassword,
+  searchForPassword,
 };

@@ -76,7 +76,7 @@ export default function App({ data, user }) {
       <>{userStatus}</>
       <div>
         {passwordsObjectLength < 1 ? (
-          <NoRecent />
+          <NoRecent message="Nothing available yet" />
         ) : (
           <div className="container overflow-auto max-h-[480px]">
             <ul className="">

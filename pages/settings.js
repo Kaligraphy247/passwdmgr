@@ -7,7 +7,6 @@ import { withSessionSsr } from "./lib/config/withSession";
 export default function Settings({ user }) {
   const router = useRouter();
   const handleClick = () => {
-    // window.confirm("yes");
     const endpoint = "/api/logout";
     fetch(endpoint);
     console.log("successfull");
