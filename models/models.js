@@ -135,7 +135,6 @@ async function fetchOneUser(lastName) {
   }
 
   //* return the  appropriate result
-  console.log(result);
   return result;
 }
 
@@ -383,7 +382,6 @@ async function searchForPassword(id, search) {
     //* finally push to main array
     searchResult.push(tempArray[0][i].dataValues);
   }
-  // console.log(allPasswords);
   //* return searchResult
   return searchResult;
 }
