@@ -2,7 +2,7 @@ import Head from "next/head";
 import QuickLinks from "../components/quickLinks";
 import Link from "next/link";
 import { useState } from "react";
-import { withSessionSsr } from "./lib/config/withSession";
+import { withSessionSsr } from "../lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImport,

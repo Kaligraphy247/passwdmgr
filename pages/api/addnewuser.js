@@ -1,8 +1,8 @@
 // * create a new user.
-//* user's master password is hashed.
+// * user's master password is hashed.
 
 import { createNewUser } from "/models/models";
-import { hashPassword } from "../lib/config/bcryptjs-config";
+import { hashPassword } from "../../lib/config/bcryptjs-config";
 
 export default async function addNewUserHandler(req, res) {
   // get data submitted in req body

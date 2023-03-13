@@ -6,7 +6,7 @@ import React from "react";
 import { NoRecent } from "../components/recent";
 import ButtonWithTooltip from "../components/buttonWithTooltip";
 import { useRouter } from "next/router";
-import { withSessionSsr } from "./lib/config/withSession";
+import { withSessionSsr } from "../lib/config/withSession";
 import { searchForPassword } from "../models/models";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

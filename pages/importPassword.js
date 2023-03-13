@@ -1,7 +1,7 @@
 import Head from "next/head";
 import QuickLinks from "../components/quickLinks";
 import { AlertInfo } from "../components/alerts";
-import { withSessionSsr } from "./lib/config/withSession";
+import { withSessionSsr } from "../lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImport,

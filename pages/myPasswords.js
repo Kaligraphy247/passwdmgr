@@ -14,7 +14,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { withSessionSsr } from "./lib/config/withSession";
+import { withSessionSsr } from "../lib/config/withSession";
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
@@ -82,7 +82,7 @@ export default function MyPasswords({ data, user }) {
                 {...passwdIsBlurred}
               >
                 <p className="truncate">
-                  <Link href="">{website}</Link>
+                  <span href="">{website}</span>
                 </p>
                 <p
                   className="px-2 blur-[7px] select-none truncate"

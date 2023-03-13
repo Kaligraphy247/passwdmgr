@@ -1,10 +1,14 @@
 import { RecentlySaved, NoRecent } from "../components/recent";
 import SearchBar from "../components/search";
 import QuickLinks from "../components/quickLinks";
-import { AlertInfo } from "/components/alerts";
+// import { AlertInfo } from "/components/alerts";
 import Link from "next/link";
 import Head from "next/head";
 import { fetchRecentPasswords } from "../models/models";
+import ButtonWithTooltip from "../components/buttonWithTooltip";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { withSessionSsr } from "../lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileCirclePlus,
@@ -13,10 +17,6 @@ import {
   faPenToSquare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import ButtonWithTooltip from "../components/buttonWithTooltip";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { withSessionSsr } from "./lib/config/withSession";
 
 const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
 const search = <FontAwesomeIcon icon={faMagnifyingGlass} />;
@@ -87,7 +87,7 @@ export default function App({ data, user }) {
                   {...passwdIsBlurred}
                 >
                   <p className="truncate">
-                    <Link href="">{website}</Link>
+                    <span>{website}</span>
                   </p>
                   <p
                     className="px-2 blur-[7px] select-none truncate"

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { AlertInfo } from "/components/alerts.js";
-import { withSessionSsr } from "../../lib/config/withSession";
+import { withSessionSsr } from "../../../lib/config/withSession";
 
 const save = <FontAwesomeIcon icon={faSave} />;
 

@@ -4,7 +4,7 @@ import { fetchOnePassword } from "/models/models.js";
 import { useState } from "react";
 import Link from "next/link";
 import { AlertInfo } from "/components/alerts";
-import { withSessionSsr } from "../../lib/config/withSession";
+import { withSessionSsr } from "../../../lib/config/withSession";
 
 export default function Single({ data }) {
   //* constants
