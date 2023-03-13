@@ -2,38 +2,48 @@
 
 # Introduction
 
-Passwordmgr is **self hosted password manager**. Hosting it is very easy, all you need is nodejs and a web browser. When you have all requirements ready, go to <a href="#Steps">Steps</a>.
+Passwordmgr is **self hosted password manager**. Hosting the app is very easy, all you need is Nodejs and a web browser. When you have all requirements ready, go to <a href="#Steps">Steps</a>.
 
 # Requirements
 
-- Familiarity with terminal/cmd.
+- Familiarity with a terminal/cmd.
 - Nodejs 18+. (Install if you don't have it installed already)
-- npm 8+ (Usually bundled with nodejs)
-- All other necessary modules will are listed in package.json. it will be installed when you run `npm i`.
+- Npm 8+ (Usually bundled with nodejs)
+- All other necessary modules are listed in `package.json`. It will be installed when you run `npm i`.
 
 # Steps
 
 - Clone this repository or unzip the accompanying zip file.
 
-  `git clone https://github.com/Kaligraphy247/passwdmgr.git`
+  ```bash
+  git clone https://github.com/Kaligraphy247/passwdmgr.git
+  ```
 
 - After unzipping/cloning, change into directory
 
-  `cd passwordmgr`
+  ```bash
+  cd passwordmgr
+  ```
 
 - Next, install all necessary files, run
 
-  `npm i`
+  ```bash
+  npm i
+  ```
 
 - After installation is complete, run next build for an optimized build of the app.
 
-  `next build`
+  ```bash
+  next build
+  ```
 
 - When the build is complete, run next start to start the local server
 
-  `next start`
+  ```
+  next start
+  ```
 
-- Open your browser, go to [http://127.0.0.1:3000](http://127.0.0.1:3000) or [localhost:3000](localhost:3000)
+- Open your browser, go to [http://127.0.0.1:3000](http://127.0.0.1:3000) or [localhost:3000](http://localhost:3000)
 
 - You need an Master account and password to continue, create a new account and password. This account is used to associate passwords with users and also as way to prevent others from viewing your saved passwords.
 - Login after you've created your account. Add passwords.
