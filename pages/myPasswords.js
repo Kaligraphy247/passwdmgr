@@ -16,7 +16,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
-import { DeleteModal } from "../components/modal";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { withSessionSsr } from "./lib/config/withSession";
@@ -88,7 +87,7 @@ export default function MyPasswords({ data, user }) {
         </button>
       </div>
       {passwordsObjectLength < 1 ? (
-        <NoRecent />
+        <NoRecent message="No passwords yet."/>
       ) : (
         <div className="container overflow-auto max-h-[480px]">
           <ul className="">
