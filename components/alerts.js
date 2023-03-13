@@ -30,9 +30,6 @@ function closeAlert() {
 export function AlertInfo({ message }) {
   return (
     <div className="alert-info">
-      {/* <span className="closebtn float-right" onClick={closeAlert}>
-        {x}
-      </span> */}
       <p>{message}</p>
     </div>
   );

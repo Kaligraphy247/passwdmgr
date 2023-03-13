@@ -1,3 +1,5 @@
+// *  edit password based on id
+
 import { updatePassword } from "/models/models";
 
 export default function updatePasswordHandler(req, res) {

@@ -1,3 +1,5 @@
+// * import password from a valid json file
+
 import fs from "fs";
 import { importPassword } from "../../models/models";
 import middleware from "../../middleware/middleware";
@@ -15,7 +17,6 @@ importPasswordHandler.post(async (req, res) => {
   const fileName = req.files["file"][0].originalFilename;
   const readStream = fs.createReadStream(file.path, { highWaterMark: 1024 });
   const data = [];
-  // console.log(file);
 
   //? reading stream,
   readStream.on("data", (chunk) => {

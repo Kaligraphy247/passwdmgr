@@ -1,3 +1,5 @@
+// * Delete password
+
 import { deletePassword } from "/models/models";
 
 export default function deletePasswordHandler(req, res) {

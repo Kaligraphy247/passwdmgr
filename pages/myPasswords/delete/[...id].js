@@ -4,6 +4,7 @@ import { fetchOnePassword } from "/models/models.js";
 import { useState } from "react";
 import Link from "next/link";
 import { AlertInfo } from "/components/alerts";
+import { withSessionSsr } from "../../lib/config/withSession";
 
 export default function Single({ data }) {
   //* constants
@@ -100,7 +101,20 @@ export default function Single({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const data = await fetchOnePassword(context.params.id);
-  return { props: { data } };
-}
+export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // implicit else
+  const data = await fetchOnePassword(params.id);
+  return {
+    props: { user, data },
+  };
+});

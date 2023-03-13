@@ -56,7 +56,7 @@ export default function Login() {
         <form className="grid" onSubmit={handleSubmit}>
           <label className="font-semibold text-xl">Username</label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="border-b focus:outline-none mt-1 mb-2 border-[#8f9094] bg-transparent"
             ref={usernameInput}
             required
             placeholder="Can be an email or just a name."
@@ -65,14 +65,14 @@ export default function Login() {
             Master pin or password
           </label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="bg-transparent border-b focus:outline-none mt-1 mb-2 border-[#8f9094]"
             ref={passwordInput}
             required
             placeholder="Please choose a pin or password."
           />
           <div className="text-center">
             <button
-              className="border mt-3 px-2 py-1 rounded shadow text-lg font-semibold hover:shadow-lg"
+              className="border mt-3 px-2 py-1 rounded shadow text-lg font-semibold hover:shadow-lg border-[#8f9094]"
               type="submit"
             >
               Login {login}

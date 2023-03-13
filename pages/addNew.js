@@ -71,21 +71,21 @@ export default function AddNewPassword({ user }) {
         <form className="grid" onSubmit={handleSubmit}>
           <label className="text-lg pl-1 font-medium">Account</label>
           <input
-            className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+            className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
             id="website"
             name="website"
             placeholder="e.g. Facebook, Reddit, Gmail e.t.c."
           ></input>
           <label className="text-lg pl-1 font-medium">Password</label>
           <input
-            className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+            className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
             id="password"
             name="password"
             placeholder="Your password in plain text. Don't worry it will be encrypted."
           ></input>
           <div className="mt-3 text-center">
             <button
-              className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-m"
+              className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-md border-[#8f9094]"
               type="submit"
             >
               Save

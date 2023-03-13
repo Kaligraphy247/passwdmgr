@@ -1,3 +1,5 @@
+// * sets user session to cookies.
+
 import { withSessionRoute } from "/pages/lib/config/withSession";
 import { fetchOneUser } from "../../models/models";
 import { verifyPassword } from "../lib/config/bcryptjs-config";

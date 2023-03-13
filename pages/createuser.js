@@ -14,10 +14,6 @@ export default function CreateUser({ data }) {
     event.preventDefault();
 
     //? read data from form normally
-    const form = event.target;
-    const formData = new FormData(form);
-
-    // preferable when using event handlers
     const data = {
       firstName: event.target.firstName.value,
       username: event.target.username.value,
@@ -34,10 +30,8 @@ export default function CreateUser({ data }) {
         // Tell the server what type of data we're sending
         // multipart/form-data is also an example
         "Content-Type": "application/json",
-        // "content-type": "multipart/form-data",
       },
       body: JSON.stringify(data),
-      // body: data,
     };
 
     //* Send the form data to forms API and get a response
@@ -46,7 +40,7 @@ export default function CreateUser({ data }) {
     // get the response from the server as JSON.
     const result = await response.json();
     // console.log(result.data); //? debug
-    setPTag(<AlertInfo message={result.data} />); // todo remove me
+    setPTag(<AlertInfo message={result.data} />);
 
     // * reset fields
     event.target.firstName.value = "";
@@ -68,14 +62,14 @@ export default function CreateUser({ data }) {
         <form className="grid" onSubmit={handleSubmit}>
           <label className="font-semibold text-xl">Name</label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="bg-transparent border-b focus:outline-none mt-1 mb-2 border-[#8f9094]"
             id="firstName"
             name="firstName"
             placeholder="What you'd like to be called."
           />
           <label className="font-semibold text-xl">Username</label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="bg-transparent border-b focus:outline-none mt-1 mb-2 border-[#8f9094]"
             id="username"
             name="username"
             placeholder="Can be an email or just a name."
@@ -84,7 +78,7 @@ export default function CreateUser({ data }) {
             Master pin or password
           </label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="bg-transparent border-b focus:outline-none mt-1 mb-2 border-[#8f9094]"
             id="masterPassword"
             name="masterPassword"
             placeholder="Please choose a pin or password."
@@ -93,20 +87,20 @@ export default function CreateUser({ data }) {
             Confirm master pin or password
           </label>
           <input
-            className="bg-transparent border-b focus:outline-none mt-1 mb-2"
+            className="bg-transparent border-b focus:outline-none mt-1 mb-2 border-[#8f9094]"
             id="ConfirmMasterPassword"
             name="ConfirmMasterPassword"
             placeholder="Confirm your pin or password"
           />
           <div className="text-center">
-            <button className="border mt-3 px-2 py-1 rounded shadow text-lg font-semibold hover:shadow-lg">
+            <button className="border mt-3 px-2 py-1 rounded shadow text-lg font-semibold hover:shadow-lg border-[#8f9094]">
               Create {newUser}
             </button>
           </div>
         </form>
         <p className="text-xs">
           Already have an account ?{" "}
-          <Link href="/createuser" className="text-red-500 hover:text-blue-600">
+          <Link href="/login" className="text-red-500 hover:text-blue-600">
             Login
           </Link>{" "}
           instead.

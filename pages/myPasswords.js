@@ -8,11 +8,7 @@ import {
   faTrash,
   faPenToSquare,
   faEye,
-  faEyeSlash,
-  faClipboardList,
   faFileCirclePlus,
-  faCopy,
-  fas,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Head from "next/head";
@@ -24,8 +20,6 @@ const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
-const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
-const clipboard = <FontAwesomeIcon icon={faClipboardList} className="pt-1 " />;
 
 export default function MyPasswords({ data, user }) {
   const router = useRouter();
@@ -34,14 +28,6 @@ export default function MyPasswords({ data, user }) {
   let passwordsObjectLength = data.length;
   let [passwdIsBlurred, setPasswdIsBlurred] = useState(true);
   let [buttonToolTipMessage, setButtonToolTipMessage] = useState("show");
-  let [showClipboard, setShowClipboard] = useState(false);
-
-  // ! under construction
-  // let nearPerfectData = data.filter()
-
-  let [clip, setClip] = useState(" ");
-  let [buttonToolTipLabel, setButtonToolTipLabel] = useState(eye);
-  // ! end
 
   const showPassword = (passwdId) => {
     let showCleanPassword = document.getElementById(`passwdID_${passwdId}`);
@@ -51,13 +37,11 @@ export default function MyPasswords({ data, user }) {
       showCleanPassword.classList.remove("blur-[7px]", "select-none");
       showCleanPassword.classList.add("blur-0");
       setButtonToolTipMessage("hide");
-      // setShowClipboard(true);
     } else if (passwdIsBlurred === false) {
       setPasswdIsBlurred(true);
       showCleanPassword.classList.remove("blur-0");
       showCleanPassword.classList.add("blur-[7px]", "select-none");
       setButtonToolTipMessage("show");
-      // setShowClipboard(false);
     }
   };
 
@@ -76,7 +60,7 @@ export default function MyPasswords({ data, user }) {
       </h1>
       <SearchBar />
       <div className="flex justify-between mb-1">
-        <h3 className="text-2xl font-bold py-1">Recently saved passwords</h3>
+        <h3 className="text-2xl font-bold py-1">My Passwords</h3>
         <button
           className="px-2 py-0.5 mb-1 rounded text-md shadow hover:shadow-md bg-green-500 text-white"
           onClick={() => {
@@ -87,7 +71,7 @@ export default function MyPasswords({ data, user }) {
         </button>
       </div>
       {passwordsObjectLength < 1 ? (
-        <NoRecent message="No passwords yet."/>
+        <NoRecent message="No passwords yet." />
       ) : (
         <div className="container overflow-auto max-h-[480px]">
           <ul className="">
@@ -98,10 +82,7 @@ export default function MyPasswords({ data, user }) {
                 {...passwdIsBlurred}
               >
                 <p className="truncate">
-                  <Link href="">
-                    {website}
-                    {/* . */}
-                  </Link>
+                  <Link href="">{website}</Link>
                 </p>
                 <p
                   className="px-2 blur-[7px] select-none truncate"
@@ -112,9 +93,7 @@ export default function MyPasswords({ data, user }) {
                 <span className="space-x-4 flex">
                   <div>
                     <ButtonWithTooltip message={buttonToolTipMessage}>
-                      <button onClick={() => showPassword(id)}>
-                        {/* {buttonToolTipLabel} */} {eye}
-                      </button>
+                      <button onClick={() => showPassword(id)}>{eye}</button>
                     </ButtonWithTooltip>
                   </div>
 
@@ -144,7 +123,7 @@ export default function MyPasswords({ data, user }) {
     </>
   );
 }
-
+// fetch user session from cookies if available, and pass to component
 export const getServerSideProps = withSessionSsr(async ({ req, res }) => {
   const user = req.session.user;
   if (!user) {

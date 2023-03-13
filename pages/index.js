@@ -22,7 +22,7 @@ const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
 const search = <FontAwesomeIcon icon={faMagnifyingGlass} />;
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
-const trash = <FontAwesomeIcon icon={faTrash} className="pt-1" />;
+const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
 
 export default function App({ data, user }) {
   const router = useRouter();

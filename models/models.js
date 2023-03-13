@@ -1,10 +1,12 @@
 const { Sequelize, DataTypes, Model, Op, where } = require("sequelize");
 
+//* initialize a new database
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "./data/db.sqlite3",
 });
 
+//* try to connect to the database, log errors if any.
 try {
   // await sequelize.authenticate();
   sequelize.authenticate();
@@ -73,16 +75,14 @@ Password.init(
   }
 );
 
+// * database relationships. One to many.
+// * One account can have many passwords.
 User.hasMany(Password, {
   // foreignKey: "userId",
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
 Password.belongsTo(User);
-
-const makeSync = async () => {
-  await sequelize.sync();
-};
 
 //* create new user
 async function createNewUser(firstName, lastName, masterPassword) {
@@ -138,7 +138,6 @@ async function fetchOneUser(lastName) {
   console.log(result);
   return result;
 }
-// fetchOneUser("Johnny");
 
 async function updateUserInfo(id, firstName, lastName) {
   await sequelize.sync();
@@ -162,9 +161,8 @@ async function updateUserInfo(id, firstName, lastName) {
     console.log("An error occurred: ", error);
   }
 }
-//* test
-// updateUserInfo(1, "Jamie", "Blond");
 
+//* Add new password. Website name and corresponding password.
 async function addNewPassword(userId, website, password) {
   await sequelize.sync();
   try {
@@ -193,12 +191,9 @@ async function addNewPassword(userId, website, password) {
   }
 }
 
-// * test
-// addNewPassword(1, "Dummy", "dummy-password");
-
+// * Fetch all passwords based on user id
 async function fetchAllPasswords(id) {
   let tempArray = [];
-  // let passwords = await Password.findAll({ where: { userId: id } });
   let allPasswords = [];
   await Password.findAll({ where: { userId: id } }).then((data) =>
     tempArray.push(data)
@@ -216,11 +211,11 @@ async function fetchAllPasswords(id) {
     //* finally push to main array
     allPasswords.push(tempArray[0][i].dataValues);
   }
-  // console.log(allPasswords);
   //* return allPasswords
   return allPasswords;
 }
 
+// * fetch Recently modified passwords
 async function fetchRecentPasswords(id) {
   let tempArray = [];
   let allPasswords = [];
@@ -242,13 +237,9 @@ async function fetchRecentPasswords(id) {
     //* finally push to main array
     allPasswords.push(tempArray[0][i].dataValues);
   }
-  // console.log(allPasswords); //! debug
   //* return allPasswords
   return allPasswords;
 }
-
-//! test
-// fetchRecentPassword(1);
 
 //* fetch only one password
 async function fetchOnePassword(id) {
@@ -275,7 +266,7 @@ async function fetchOnePassword(id) {
   return result;
 }
 
-// * update
+// * update password or website
 async function updatePassword(id, website, password) {
   await sequelize.sync();
   try {
@@ -298,9 +289,7 @@ async function updatePassword(id, website, password) {
   }
 }
 
-// *  test
-// updatePassword(1, "Facebook", "facebook-password");
-
+// * Delete password based on password id
 async function deletePassword(id) {
   await sequelize.sync();
   try {
@@ -323,9 +312,8 @@ async function deletePassword(id) {
   }
 }
 
-// * test
-// deletePassword(3);
-
+// * Fetch all passwords, based on current user, preparing it for
+// * export
 async function exportPassword(id) {
   let tempArray = [];
   let allPasswords = [];
@@ -349,6 +337,9 @@ async function exportPassword(id) {
   return allPasswords;
 }
 
+// * Handle passwords imports,
+// * API ensures that the format is okay, before
+// * reaching this point.
 async function importPassword(id, website, password) {
   await sequelize.sync();
   try {
@@ -371,6 +362,7 @@ async function importPassword(id, website, password) {
   }
 }
 
+// * Search for password based on user and search query.
 async function searchForPassword(id, search) {
   let tempArray = [];
   // let passwords = await Password.findAll({ where: { userId: id } });
@@ -396,6 +388,7 @@ async function searchForPassword(id, search) {
   return searchResult;
 }
 
+// * export functions I used in project.
 export {
   fetchAllPasswords,
   fetchOnePassword,

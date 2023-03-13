@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -33,17 +32,16 @@ export default function QuickLinks() {
       <div className="mt-6 text-center space-x-4">
         {asPath !== "/" ? (
           <button
-            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-[#8f9094]"
             onClick={() => {
               router.push("/");
             }}
           >
-            {/* <Link href="/"></Link> */}
             Home {home}
           </button>
         ) : (
           <button
-            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+            className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-[#8f9094]"
             onClick={() => {
               router.push("/myPasswords");
             }}
@@ -53,7 +51,7 @@ export default function QuickLinks() {
         )}
 
         <button
-          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-[#8f9094]"
           onClick={() => {
             router.push("/importPassword");
           }}
@@ -62,7 +60,7 @@ export default function QuickLinks() {
         </button>
 
         <button
-          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-[#8f9094]"
           onClick={() => {
             router.push("/exportPassword");
           }}
@@ -71,16 +69,7 @@ export default function QuickLinks() {
         </button>
 
         <button
-          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
-          onClick={() => {
-            router.push("/settings");
-          }}
-        >
-          Settings {settings}
-        </button>
-
-        <button
-          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-gray-300"
+          className="p-1 rounded w-[100px] h-[40px] hover:shadow hover:border hover:border-[#8f9094]"
           onClick={handleLogout}
         >
           Logout {logout}

@@ -1,3 +1,5 @@
+// * logout api
+
 import { withSessionRoute } from "/pages/lib/config/withSession";
 
 export default withSessionRoute(logout);

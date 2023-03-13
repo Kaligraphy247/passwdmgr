@@ -1,10 +1,9 @@
 import ButtonWithTooltip from "../components/buttonWithTooltip";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
-const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} className="pt-1" />;
 
 export function RecentlySaved() {
   return (
@@ -31,11 +30,9 @@ export function RecentlySaved() {
 export function NoRecent({ message }) {
   return (
     <>
-      <p className="border text-gray-400 text-center py-8 px-4 rounded">
+      <p className="border text-red-700 text-center py-8 px-4 rounded border-[#8f9094]">
         {message}
       </p>
     </>
   );
 }
-
-// export RecentlySaved

@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { AlertInfo } from "/components/alerts.js";
+import { withSessionSsr } from "../../lib/config/withSession";
+
 const save = <FontAwesomeIcon icon={faSave} />;
 
 export default function Single({ data }) {
@@ -60,13 +62,13 @@ export default function Single({ data }) {
             <form className="grid" onSubmit={handleSubmit} key={id}>
               <label className="text-lg pl-1 font-medium pt-2">Website</label>
               <input
-                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
                 name="website"
                 defaultValue={website}
               />
               <label className="text-lg pl-1 font-medium pt-2">Password</label>
               <input
-                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
                 name="password"
                 defaultValue={password}
               />
@@ -74,7 +76,7 @@ export default function Single({ data }) {
                 Created at
               </label>
               <input
-                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
                 defaultValue={createdAt}
                 readOnly
               />
@@ -82,13 +84,13 @@ export default function Single({ data }) {
                 Last updated
               </label>
               <input
-                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm"
+                className="bg-inherit border outline-none rounded p-1 focus:outline-1 focus:outline-blue-200 focus:border-none focus:rounded-sm border-[#8f9094]"
                 defaultValue={updatedAt}
                 readOnly
               />
               <div className="mt-3 text-center">
                 <button
-                  className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-m"
+                  className="border rounded px-2 py-1 text-lg font-medium shadow hover:shadow-md border-[#8f9094]"
                   type="submit"
                 >
                   Save
@@ -105,7 +107,26 @@ export default function Single({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const data = await fetchOnePassword(context.params.id);
-  return { props: { data } };
-}
+// export async function getServerSideProps(context) {
+//   const data = await fetchOnePassword(context.params.id);
+//   return { props: { data } };
+// }
+
+// fetch user session from cookies if available, and pass to component
+export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
+  const user = req.session.user;
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  // implicit else
+  const data = await fetchOnePassword(params.id);
+  return {
+    props: { user, data },
+  };
+});

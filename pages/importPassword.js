@@ -58,7 +58,7 @@ export default function ImportPasswords({ user }) {
         </h2>
 
         <form
-          className="border-2 py-2 px-1 border-dotted"
+          className="border-2 py-2 px-1 border-dotted border-[rgba(146,153,181,1)]"
           onSubmit={handleSubmit}
         >
           <div className="pb-3 text-sm text-center">
@@ -83,7 +83,7 @@ export default function ImportPasswords({ user }) {
           />
           <div className="text-center">
             <button
-              className="border px-2 py-1 rounded font-semibold shadow-md"
+              className="border px-2 py-1 rounded font-semibold hover:shadow-md border-[#8f9094]"
               type="submit"
             >
               Import {fileImport}

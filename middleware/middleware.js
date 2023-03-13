@@ -1,3 +1,5 @@
+// Used to capture uploaded files for preprocessing, before forwarding to API/Server
+
 import nextConnect from "next-connect";
 import multiparty from "multiparty";
 

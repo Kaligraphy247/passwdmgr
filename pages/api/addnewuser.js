@@ -1,3 +1,6 @@
+// * create a new user.
+//* user's master password is hashed.
+
 import { createNewUser } from "/models/models";
 import { hashPassword } from "../lib/config/bcryptjs-config";
 
@@ -5,7 +8,6 @@ export default async function addNewUserHandler(req, res) {
   // get data submitted in req body
   const body = req.body; // ? try deconstructing instead, in the future
   // ? example
-  // const { firstName, username, password, confirmPassword } = req.body;
 
   if (body.password != body.confirmPassword) {
     return await res.status(400).json({ data: "Passwords do not match!" });
@@ -27,7 +29,6 @@ export default async function addNewUserHandler(req, res) {
   } else {
     //* save to db
     const hashedPassword = hashPassword(body.password);
-    console.log(hashedPassword);
     createNewUser(body.firstName, body.username, hashedPassword);
     return await res.status(200).json({ data: "Success!" });
   }

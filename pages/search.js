@@ -53,7 +53,10 @@ export default function Settings({ data }) {
       <h1 className="text-3xl font-bold text-center mb-2">Search Results</h1>
       <h3 className="text-2xl font-bold py-1">
         Search for "
-        <span className="py-0.5 bg-blue-100 font-mono font-medium">{q}</span>"
+        <span className="py-0.5 px-1 bg-blue-100 rounded font-mono font-medium">
+          {q}
+        </span>
+        "
       </h3>
       {searchResultLength === 0 ? (
         <NoRecent message={`Oops! No record was found.`} />

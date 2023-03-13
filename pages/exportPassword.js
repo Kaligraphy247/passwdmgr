@@ -42,7 +42,6 @@ export default function ExportPasswords({ user }) {
       setDownloadState(`File is ready to download `);
       setShowDlBtn(true);
     }
-    // console.log(result);
   };
 
   return (
@@ -51,13 +50,13 @@ export default function ExportPasswords({ user }) {
         <title>Export Password</title>
       </Head>
       <h1 className="text-3xl font-bold text-center mb-2">Export Passwords</h1>
-      <h3 className="text-2xl font-bold py-1">Export your passwords here</h3>
+      <h3 className="text-2xl font-bold py-1">Export your passwords</h3>
       <div className="container">
         <h2 className="font-medium text-lg">
           Export your passwords to a valid JSON file that can be downloaded.
         </h2>
 
-        <form className="border-2 py-2 px-1 border-dotted">
+        <form className="border-2 py-2 px-1 border-dotted border-[rgba(146,153,181,1)]">
           <div className="pb-3 text-sm text-center">
             <p>
               <span className="text-blue-600">{info}</span> Suitable for files
@@ -72,7 +71,7 @@ export default function ExportPasswords({ user }) {
           </div>
           <div className="text-center">
             <button
-              className="border px-2 py-1 rounded font-semibold shadow-md"
+              className="border px-2 py-1 rounded font-semibold hover:shadow-md border-[#8f9094]"
               onClick={handleClick}
             >
               Export {fileExport}
