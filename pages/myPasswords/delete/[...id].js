@@ -45,7 +45,7 @@ export default function Single({ data }) {
   return (
     <>
       <h1 className="text-3xl font-bold text-center mb-2">
-        Delete Account Data
+        Delete Account - {data.map(({website}) => (website))}
       </h1>
       <>{deleteStatus}</>
       <div className="container">

@@ -48,7 +48,7 @@ export default function Single({ data }) {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center mb-2">Account name</h1>
+      <h1 className="text-3xl font-bold text-center mb-2">Account - {data.map(({website}) => (website))}</h1>
       <>{savedStatus}</>
       <div className="container">
         {data.map(({ id, website, password, createdAt, updatedAt }) => (
@@ -112,7 +112,7 @@ export default function Single({ data }) {
 //   return { props: { data } };
 // }
 
-// fetch user session from cookies if available, and pass to component
+//* fetch user session from cookies if available, and pass to component
 export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
   const user = req.session.user;
   if (!user) {

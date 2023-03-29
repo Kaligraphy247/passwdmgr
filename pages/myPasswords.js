@@ -3,6 +3,10 @@ import SearchBar from "../components/search";
 import { NoRecent } from "../components/recent";
 import ButtonWithTooltip from "../components/buttonWithTooltip";
 import { fetchAllPasswords } from "../models/models";
+import Head from "next/head";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { withSessionSsr } from "../lib/config/withSession";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -10,16 +14,14 @@ import {
   faEye,
   faFileCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
-import Head from "next/head";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { withSessionSsr } from "../lib/config/withSession";
+
 
 const pen = <FontAwesomeIcon icon={faPenToSquare} className="pt-1" />;
 const trash = <FontAwesomeIcon icon={faTrash} className="text-red-500 pt-1" />;
 const eye = <FontAwesomeIcon icon={faEye} className="pt-1" />;
 const plus = <FontAwesomeIcon icon={faFileCirclePlus} />;
+
+
 
 export default function MyPasswords({ data, user }) {
   const router = useRouter();
@@ -28,12 +30,13 @@ export default function MyPasswords({ data, user }) {
   let passwordsObjectLength = data.length;
   let [passwdIsBlurred, setPasswdIsBlurred] = useState(true);
   let [buttonToolTipMessage, setButtonToolTipMessage] = useState("show");
-
+  
   const showPassword = (passwdId) => {
     let showCleanPassword = document.getElementById(`passwdID_${passwdId}`);
 
     if (passwdIsBlurred === true) {
       setPasswdIsBlurred(false);
+      // console.log(showCleanPassword)
       showCleanPassword.classList.remove("blur-[7px]", "select-none");
       showCleanPassword.classList.add("blur-0");
       setButtonToolTipMessage("hide");

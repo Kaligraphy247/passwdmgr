@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Model, Op, where } = require("sequelize");
+import { decrypt, KEY } from "../lib/config/cipher";
 
 //* initialize a new database
 const sequelize = new Sequelize({
@@ -207,6 +208,12 @@ async function fetchAllPasswords(id) {
     tempArray[0][i].dataValues.updatedAt =
       tempArray[0][i].dataValues.updatedAt.toLocaleString();
 
+    //* decrypt password
+    tempArray[0][i].dataValues.password = decrypt(
+      tempArray[0][i].dataValues.password,
+      KEY
+    );
+
     //* finally push to main array
     allPasswords.push(tempArray[0][i].dataValues);
   }
@@ -233,6 +240,12 @@ async function fetchRecentPasswords(id) {
     tempArray[0][i].dataValues.updatedAt =
       tempArray[0][i].dataValues.updatedAt.toLocaleString();
 
+    //* decrypt password
+    tempArray[0][i].dataValues.password = decrypt(
+      tempArray[0][i].dataValues.password,
+      KEY
+    );
+
     //* finally push to main array
     allPasswords.push(tempArray[0][i].dataValues);
   }
@@ -256,6 +269,12 @@ async function fetchOnePassword(id) {
     //* convert dataValues.updatedAt to `toLocaleString`
     tempArray[i].dataValues.updatedAt =
       tempArray[i].dataValues.updatedAt.toLocaleString();
+
+    //* decrypt password
+    tempArray[i].dataValues.password = decrypt(
+      tempArray[i].dataValues.password,
+      KEY
+    );
 
     //* finally push to main array
     result.push(tempArray[i].dataValues);
@@ -378,6 +397,12 @@ async function searchForPassword(id, search) {
     //* convert dataValues.updatedAt to `toLocaleString`
     tempArray[0][i].dataValues.updatedAt =
       tempArray[0][i].dataValues.updatedAt.toLocaleString();
+
+    //* decrypt password
+    tempArray[0][i].dataValues.password = decrypt(
+      tempArray[0][i].dataValues.password,
+      KEY
+    );
 
     //* finally push to main array
     searchResult.push(tempArray[0][i].dataValues);
