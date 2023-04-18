@@ -1,4 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;1,700&display=swap');
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../public/fonts/FiraSans-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../public/fonts/FiraSans-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../public/fonts/FiraSans-Italic.ttf");
+  font-weight: bold;
+  font-style: italic
+}
+
 
 @tailwind base;
 @tailwind components;
