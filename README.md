@@ -7,8 +7,8 @@ Passwordmgr is **self hosted password manager**. Hosting the app is very easy, a
 # Requirements
 
 - Familiarity with a terminal/cmd.
-- Nodejs 18+. (Install if you don't have it installed already)
-- Npm 8+ (Usually bundled with nodejs)
+- [Nodejs 18+](https://nodejs.org/en/download) (Install if you don't have it installed already)
+- Npm 8+ (Usually bundled with Nodejs)
 - All other necessary modules are listed in `package.json`. It will be installed when you run `npm i`.
 
 # Steps
@@ -47,8 +47,3 @@ Passwordmgr is **self hosted password manager**. Hosting the app is very easy, a
 
 - You need a Master account and password to continue, create a new account and password. This account is used to associate passwords with users and also as way to prevent others from viewing your saved passwords.
 - Login after you've created your account. Add passwords.
-
-# Software Architecture
-
-Seeing as this a web app, the architecture at its roots, is an MVC (Model-View -Controller). The backend framework uses Nextjs, while following this architecture takes it one step further by viewing files in project folder "**Pages**" as routes. Other files in the project subfolder are treated as routes while files containing "**[]**" are treated as dynamic routes. All files in the subfolder "**pages/api**" are treated as api routes. Each page/route does one particular thing, even though it can handle much more. This makes it easy to maintain and fix bugs. Testing is also easier.
-The frontend is done with React. Nextjs uses React for it's frontend. React makes it easy to write web component which can be viewed as independent sections of a webpage. This web components can be reused at anytime. React is written with `JSX` which is an extension of HTML using JavaScript.
