@@ -45,5 +45,11 @@ Passwordmgr is **self hosted password manager**. Hosting the app is very easy, a
 
 - Open your browser, go to [http://127.0.0.1:3000](http://127.0.0.1:3000) or [localhost:3000](http://localhost:3000)
 
-- You need a Master account and password to continue, create a new account and password. This account is used to associate passwords with users and also as way to prevent others from viewing your saved passwords.
+- You need a Master account and password to continue, create a new account and password.
+  > This account is used to associate passwords with users and also as way to prevent others from viewing your saved passwords.
+
 - Login after you've created your account. Add passwords.
+
+- You can perform actions by clicking on the appropriate icon on the right.
+
+- It is always recommended to logout when you're done. Your session data will be deleted once you close your browser or shutdown your computer, either way is fine.
